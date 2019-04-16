@@ -5,13 +5,13 @@
   Time: 10:22
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>$Title$</title>
 </head>
 <body>
-<div style="position: absolute; margin: auto; top: 0; right: 0; bottom: 0; left: 0; width: 200px; height: 400px;">
+<div style="position: absolute; margin: auto; top: 0; right: 0; bottom: 0; left: 0; width: 205px; height: 180px; background-color: #f2f2f2;">
     <form method="get" action="load">
     <table>
         <tr>
@@ -28,6 +28,8 @@
                 </select>
             </td>
         </tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr>
         <tr>
             <td>
                 <input type="submit" value="Start" style="width:200px;"/>
