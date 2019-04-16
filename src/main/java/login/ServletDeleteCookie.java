@@ -38,23 +38,9 @@ public class ServletDeleteCookie extends HttpServlet {
             if (cookie.getName().equals("login")) {
                 cookie.setMaxAge(0);//0-usuniecie -1 do zamkniecia przegladarki
                 response.addCookie(cookie);
-            break;
+                response.sendRedirect("home");
+                break;
             }
-        }
-        
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Wylogowano użytownika!</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<form method=\"POST\" action=\"home\">");
-                out.println("Wylogowano<br>");
-                out.println("<input type=\"submit\" value=\"Wróć na stronę główną\"/>");
-            out.println("</form>");
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 

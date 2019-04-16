@@ -58,7 +58,7 @@ public class ServletHome extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Witaj goÅ›ciu!</title>");            
+            out.println("<title>Witaj goœciu!</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<br><br>Nawigacja: ");

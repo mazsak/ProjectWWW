@@ -63,11 +63,11 @@ public class LoginVerify extends HttpServlet {
                 Cookie cookie = new Cookie("login", request.getParameter("login"));
                 cookie.setMaxAge(-1);
                 response.addCookie(cookie);
-                out.println("Zalogowano pomy≈õlnie<br><br>");
+                response.sendRedirect("home");
             }else{
-                out.println("Nieprawid≈Çowa nazwa u≈ºytownika/has≈Ço.<br><br>");
+                out.println("Nieprawid≥owa nazwa uøytownika/has≥o.<br><br>");
             }
-            out.println("<input type=\"submit\" value=\"Wr√≥ƒá na stronƒô g≈Ç√≥wnƒÖ\"/>");
+            out.println("<input type=\"submit\" value=\"WrÛÊ na stronÍ g≥Ûwnπ\"/>");
             out.println("</form>");
             out.println("</body>");
             out.println("</html>");
