@@ -6,4 +6,9 @@
     <listener>
         <listener-class>Listener</listener-class>
     </listener>
+
+    <context-param>
+        <param-name>nameFile</param-name>
+        <param-value>wordsList.xml</param-value>
+    </context-param>
 </web-app>
