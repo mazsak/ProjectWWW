@@ -3,22 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logowanie;
+package login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Acerek
  */
-public class ServletDeleteCookie extends HttpServlet {
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,27 +30,19 @@ public class ServletDeleteCookie extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        Cookie[] cookies = request.getCookies();
-        for (int i = 0; i < cookies.length; i++) {//przeglądanie tablicy z ciasteczkami
-            Cookie cookie = cookies[i];
-            if (cookie.getName().equals("login")) {
-                cookie.setMaxAge(0);//0-usuniecie -1 do zamkniecia przegladarki
-                response.addCookie(cookie);
-            break;
-            }
-        }
-        
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Wylogowano użytownika!</title>");            
+            out.println("<title>Servlet Login</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<form method=\"POST\" action=\"home\">");
-                out.println("Wylogowano<br>");
-                out.println("<input type=\"submit\" value=\"Wróć na stronę główną\"/>");
+            out.println("<form method=\"POST\" action=\"LoginVerify\">");
+                out.println("Logowanie: <br><br>");
+                out.println("Login: <br> <input type=\"text\" name=\"login\"/><br>");
+                out.println("Hasło: <br> <input type=\"password\" name=\"password\"/><br>");
+                out.println("<br><input type=\"submit\" value=\"Zaloguj\"/>");
             out.println("</form>");
             out.println("</body>");
             out.println("</html>");

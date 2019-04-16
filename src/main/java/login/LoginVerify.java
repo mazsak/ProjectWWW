@@ -3,20 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logowanie;
+package login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Acerek
  */
-public class Login extends HttpServlet {
+public class LoginVerify extends HttpServlet {
+
+    private Map<String, String> usernamePasswordMap = new HashMap<>();
+
+    public LoginVerify() {
+        usernamePasswordMap.put("admin", "admin");
+        usernamePasswordMap.put("adam", "polejczuk");
+        usernamePasswordMap.put("mateusz", "samluk");
+        usernamePasswordMap.put("andrzej", "kulesza");
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,14 +48,26 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
+            out.println("<title>Servlet LoginVerify</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<form method=\"POST\" action=\"LoginVerify\">");
-                out.println("Logowanie: <br><br>");
-                out.println("Login: <br> <input type=\"text\" name=\"login\"/><br>");
-                out.println("Hasło: <br> <input type=\"password\" name=\"password\"/><br>");
-                out.println("<br><input type=\"submit\" value=\"Zaloguj\"/>");
+
+            String username = request.getParameter("login");
+            String password = request.getParameter("password");
+            out.println("<form method=\"POST\" action=\"home\">");
+            if (usernamePasswordMap.containsKey(username) && usernamePasswordMap.get(username).equals(password)) {
+                HttpSession session = request.getSession();
+                synchronized(session){
+                    session.setAttribute("logged", request.getParameter(username));
+                }
+                Cookie cookie = new Cookie("login", request.getParameter("login"));
+                cookie.setMaxAge(-1);
+                response.addCookie(cookie);
+                out.println("Zalogowano pomyślnie<br><br>");
+            }else{
+                out.println("Nieprawidłowa nazwa użytownika/hasło.<br><br>");
+            }
+            out.println("<input type=\"submit\" value=\"Wróć na stronę główną\"/>");
             out.println("</form>");
             out.println("</body>");
             out.println("</html>");

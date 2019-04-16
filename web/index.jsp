@@ -7,10 +7,34 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
+<head>
     <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+</head>
+<body>
+<div style="position: absolute; margin: auto; top: 0; right: 0; bottom: 0; left: 0; width: 200px; height: 400px;">
+    <form method="get" action="load">
+    <table>
+        <tr>
+            <th><h1 style="width:200px;">Hangman</h1></th>
+        </tr>
+        <tr>
+            <td style="width:200px;">Select language:</td>
+        </tr>
+        <tr>
+            <td>
+                <select name="lang" style="width:200px;">
+                    <option value="pol">Poland</option>
+                    <option value="eng">English</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Start" style="width:200px;"/>
+            </td>
+        </tr>
+    </table>
+    </form>
+</div>
+</body>
 </html>

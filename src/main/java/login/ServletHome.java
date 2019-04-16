@@ -1,37 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package logowanie;
+package login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Acerek
  */
-public class LoginVerify extends HttpServlet {
-
-    private Map<String, String> usernamePasswordMap = new HashMap<>();
-
-    public LoginVerify() {
-        usernamePasswordMap.put("admin", "admin");
-        usernamePasswordMap.put("adam", "polejczuk");
-        usernamePasswordMap.put("mateusz", "samluk");
-        usernamePasswordMap.put("andrzej", "kulesza");
-    }
+public class ServletHome extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,32 +26,43 @@ public class LoginVerify extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        String login = "";
+
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
+            Cookie[] cookies = request.getCookies(); //pobranie tablicy z ciasteczkami
+            if (cookies != null) {
+                for (int i = 0; i < cookies.length; i++) {//przeglądanie tablicy z ciasteczkami
+                    Cookie cookie = cookies[i];
+                    if (cookie.getName().equals("login")) {
+                        response.sendRedirect("index.jsp");
+                        break;
+                    }
+                }
+                if (login.equals("")) {
+                    out.println("Nie jestes zalogowany<br>");
+                    showGuestVersion(response);
+                }
+            } else {
+                if (login.equals("")) {
+                    out.println("Nie jestes zalogowany<br>");
+                    showGuestVersion(response);
+                }
+            }
+        }
+    }
+    
+    private void showGuestVersion(HttpServletResponse response) throws IOException{
+        try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginVerify</title>");
+            out.println("<title>Witaj gościu!</title>");            
             out.println("</head>");
             out.println("<body>");
-
-            String username = request.getParameter("login");
-            String password = request.getParameter("password");
-            out.println("<form method=\"POST\" action=\"home\">");
-            if (usernamePasswordMap.containsKey(username) && usernamePasswordMap.get(username).equals(password)) {
-                HttpSession session = request.getSession();
-                synchronized(session){
-                    session.setAttribute("logged", request.getParameter(username));
-                }
-                Cookie cookie = new Cookie("login", request.getParameter("login"));
-                cookie.setMaxAge(-1);
-                response.addCookie(cookie);
-                out.println("Zalogowano pomyślnie<br><br>");
-            }else{
-                out.println("Nieprawidłowa nazwa użytownika/hasło.<br><br>");
-            }
-            out.println("<input type=\"submit\" value=\"Wróć na stronę główną\"/>");
-            out.println("</form>");
+            out.println("<br><br>Nawigacja: ");
+            out.println("<br><a href=\"Login\">Logowanie</a>");
             out.println("</body>");
             out.println("</html>");
         }

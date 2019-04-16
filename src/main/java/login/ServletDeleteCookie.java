@@ -1,4 +1,9 @@
-package logowanie;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,13 +12,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Acerek
  */
-public class ServletHome extends HttpServlet {
+public class ServletDeleteCookie extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,49 +31,28 @@ public class ServletHome extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String login = "";
-
-        try (PrintWriter out = response.getWriter()) {
-            
-            Cookie[] cookies = request.getCookies(); //pobranie tablicy z ciasteczkami
-            if (cookies != null) {
-                for (int i = 0; i < cookies.length; i++) {//przeglądanie tablicy z ciasteczkami
-                    Cookie cookie = cookies[i];
-                    if (cookie.getName().equals("login")) {
-                        login = cookie.getValue();
-                        out.println("Jestes zalogowany " + login + "<br>");
-                        //cookie.setMaxAge(0);//0-usuniecie -1 do zamkniecia przegladarki
-                        
-                        out.println("<br><br>Nawigacja: ");
-                       
-                        out.println("<br>-------------<br><a href=\"deletecookie\">Wyloguj się</a>");
-                        break;
-                    }
-                }
-                if (login.equals("")) {
-                    out.println("Nie jestes zalogowany<br>");
-                    showGuestVersion(response);
-                }
-            } else {
-                if (login.equals("")) {
-                    out.println("Nie jestes zalogowany<br>");
-                    showGuestVersion(response);
-                }
+        
+        Cookie[] cookies = request.getCookies();
+        for (int i = 0; i < cookies.length; i++) {//przeglądanie tablicy z ciasteczkami
+            Cookie cookie = cookies[i];
+            if (cookie.getName().equals("login")) {
+                cookie.setMaxAge(0);//0-usuniecie -1 do zamkniecia przegladarki
+                response.addCookie(cookie);
+            break;
             }
         }
-    }
-    
-    private void showGuestVersion(HttpServletResponse response) throws IOException{
+        
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Witaj gościu!</title>");            
+            out.println("<title>Wylogowano użytownika!</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<br><br>Nawigacja: ");
-            out.println("<br><a href=\"Login\">Logowanie</a>");
+            out.println("<form method=\"POST\" action=\"home\">");
+                out.println("Wylogowano<br>");
+                out.println("<input type=\"submit\" value=\"Wróć na stronę główną\"/>");
+            out.println("</form>");
             out.println("</body>");
             out.println("</html>");
         }
