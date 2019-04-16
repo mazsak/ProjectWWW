@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<words xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='wordsSchema.xsd'>
+    <word>
+        <item lang="PL">moneta</item>
+        <item lang="ENG">coin</item>
+    </word>
+    <word>
+        <item lang="PL">czajnik</item>
+        <item lang="ENG">kettle</item>
+    </word>
+    <word>
+        <item lang="PL">okulary</item>
+        <item lang="ENG">glasses</item>
+    </word>
+    <word>
+        <item lang="PL">rower</item>
+        <item lang="ENG">bicycle</item>
+    </word>
+    <word>
+        <item lang="PL">fotel</item>
+        <item lang="ENG">armchair</item>
+    </word>
+    <word>
+        <item lang="PL">katedra</item>
+        <item lang="ENG">cathedral</item>
+    </word>
+    <word>
+        <item lang="PL">pomnik</item>
+        <item lang="ENG">monument</item>
+    </word>
+    <word>
+        <item lang="PL">zamek</item>
+        <item lang="ENG">castle</item>
+    </word>
+    <word>
+        <item lang="PL">uczelnia</item>
+        <item lang="ENG">college</item>
+    </word>
+    <word>
+        <item lang="PL">bocian</item>
+        <item lang="ENG">stork</item>
+    </word>
+</words>
